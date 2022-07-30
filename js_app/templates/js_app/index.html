@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Квадратное уравнение</title>
+</head>
+<body>
+    <form id="form" method="post">
+        {% csrf_token %}
+        {{ form.a_field }}x<sup>2</sup>+{{ form.b_field }}x+{{ form.c_field }}=0
+    </form>
+    <button onclick="MyFunc()">Вычислить корни</button>
+    <p id="para"></p>
+
+    <script>
+       function MyFunc() {
+            var a = Number(document.getElementById('form').a_field.value),
+            b = Number(document.getElementById('form').b_field.value),
+            c = Number(document.getElementById('form').c_field.value);
+            if (a===0 && b===0 && c===0) {
+                    document.getElementById('para').innerHTML = '0 = 0';
+                    console.log(1);
+            } else if (a===0) {
+                    document.getElementById('para').innerHTML = 'x = ' + String(-c / b);
+                    console.log(2);
+            } else if (b===0) {
+                    x = -c / a;
+                    console.log(x)
+                    if (x < 0) {
+                        document.getElementById('para').innerHTML = 'Нет корней';
+                    } else {
+                        document.getElementById('para').innerHTML = 'x<sub>1</sub> = ' + String(Math.sqrt(x)) +
+                        ', x<sub>2</sub> = ' + String(-Math.sqrt(x));
+                    }
+                    console.log(3)
+            } else if (c===0) {
+                    document.getElementById('para').innerHTML = 'x<sub>1</sub> = ' + 0 +
+                            ', x<sub>2</sub> = ' + String(-b / a);
+            } else if (a===0 && b===0) {
+                    document.getElementById('para').innerHTML = 'Корней нет'
+            } else if (b===0 && c===0 || a===0 && c===0) {
+                    document.getElementById('para').innerHTML = 'x = ' + 0;
+            } else {
+                    console.log(a, b, c);
+                    discr = (b ** 2) - (4 * a * c);
+                    if (discr > 0) {
+                        x1 = (-b + Math.sqrt(discr)) / (2 * a);
+                        x2 = (-b - Math.sqrt(discr)) / (2 * a);
+                        console.log(x1, x2, discr);
+                        document.getElementById('para').innerHTML = 'x<sub>1</sub> = ' + x1 +
+                        ', x<sub>2</sub> = ' + x2;
+                    } else if (discr===0) {
+                        document.getElementById('para').innerHTML = 'x<sub>1</sub> = ' + (-b / (2 * a));
+                    } else {
+                        document.getElementById('para').innerHTML = 'Корней нет';
+                    }
+            }
+            confirm("Привет!! ЙОУ ЙОУ ЙОУ!!!!", "HUI")
+       }
+    </script>
+</body>
+</html>
